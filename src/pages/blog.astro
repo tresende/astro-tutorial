@@ -1,0 +1,25 @@
+---
+import Card from '../components/Card.astro'
+import Showcase from '../components/ReactShowcase/Showcase'
+import Layout from '../layouts/layout.astro'
+
+const posts = await Astro.glob('../posts/*.md')
+---
+
+<Layout title="Astro Blog">
+  <section class="page-content">
+    <div class="container">
+      {
+        posts.map(({ frontmatter }) => (
+          <Card>
+            <h2>{frontmatter.title}</h2>
+            <p>{frontmatter.excerpt}</p>
+            <a href={`/${frontmatter.slug}`} class="btn">
+              Read More
+            </a>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+</Layout>
